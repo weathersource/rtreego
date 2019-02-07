@@ -1,10 +1,14 @@
 rtreego
 =======
 
+[![Build Status](https://travis-ci.com/weathersource/rtreego.svg?branch=master)](https://travis-ci.com/weathersource/rtreego)
+[![Codevov](https://img.shields.io/codecov/c/github/weathersource/rtreego.svg)](https://codecov.io/gh/weathersource/rtreego)
+[![Go Report Card](https://goreportcard.com/badge/github.com/weathersource/rtreego)](https://goreportcard.com/report/github.com/weathersource/rtreego)
+[![GoDoc](https://img.shields.io/badge/godoc-ref-blue.svg)](https://godoc.org/github.com/weathersource/rtreego)
+
 A library for efficiently storing and querying spatial data
 in the Go programming language.
 
-[![Build Status](https://travis-ci.org/dhconnelly/rtreego.png?branch=master)](https://travis-ci.org/dhconnelly/rtreego)
 
 About
 -----
