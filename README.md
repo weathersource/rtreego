@@ -1,17 +1,12 @@
-rtreego
-=======
+# rtreego
 
-[![Build Status](https://travis-ci.com/weathersource/rtreego.svg?branch=master)](https://travis-ci.com/weathersource/rtreego)
-[![Codevov](https://img.shields.io/codecov/c/github/weathersource/rtreego.svg)](https://codecov.io/gh/weathersource/rtreego)
-[![Go Report Card](https://goreportcard.com/badge/github.com/weathersource/rtreego)](https://goreportcard.com/report/github.com/weathersource/rtreego)
+[![CircleCI](https://circleci.com/gh/weathersource/rtreego.svg?style=shield)](https://circleci.com/gh/weathersource/rtreego)
 [![GoDoc](https://img.shields.io/badge/godoc-ref-blue.svg)](https://godoc.org/github.com/weathersource/rtreego)
 
 A library for efficiently storing and querying spatial data
 in the Go programming language.
 
-
-About
------
+## About
 
 The R-tree is a popular data structure for efficiently storing and
 querying spatial objects; one common use is implementing geospatial
@@ -20,24 +15,22 @@ and k-nearest-neighbor queries are supported.
 
 R-trees are balanced, so maximum tree height is guaranteed to be
 logarithmic in the number of entries; however, good worst-case
-performance is not guaranteed.  Instead, a number of rebalancing
-heuristics are applied that perform well in practice.  For more
+performance is not guaranteed. Instead, a number of rebalancing
+heuristics are applied that perform well in practice. For more
 details please refer to the references.
 
 This implementation handles the general N-dimensional case; for a more
 efficient implementation for the 3-dimensional case, see [Patrick
 Higgins' fork](https://github.com/patrick-higgins/rtreego).
 
-Getting Started
----------------
+## Getting Started
 
 Get the source code from [GitHub](https://github.com/dhconnelly/rtreego) or,
 with Go 1 installed, run `go get github.com/dhconnelly/rtreego`.
 
 Make sure you `import github.com/dhconnelly/rtreego` in your Go source files.
 
-Documentation
--------------
+## Documentation
 
 ### Storing, updating, and deleting objects
 
@@ -58,7 +51,7 @@ Any type that implements the `Spatial` interface can be stored in the tree:
     }
 
 `Rect`s are data structures for representing spatial objects, while `Point`s
-represent spatial locations.  Creating `Point`s is easy--they're just slices
+represent spatial locations. Creating `Point`s is easy--they're just slices
 of `float64`s:
 
     p1 := rtreego.Point{0.4, 0.5}
@@ -91,13 +84,13 @@ We can insert and delete objects from the tree in any order.
     // do some stuff...
     rt.Insert(anotherThing)
 
-Note that ```Delete``` function does the equality comparison by comparing the
+Note that `Delete` function does the equality comparison by comparing the
 memory addresses of the objects. If you do not have a pointer to the original
 object anymore, you can define a custom comparator.
 
     type Comparator func(obj1, obj2 Spatial) (equal bool)
 
-You can use a custom comparator with ```DeleteWithComparator``` function.
+You can use a custom comparator with `DeleteWithComparator` function.
 
     cmp := func(obj1, obj2 Spatial) bool {
       sp1 := obj1.(*IDRect)
@@ -128,7 +121,7 @@ point into a rectangle using the `ToRect` method:
     rt.Insert(&Somewhere{rtreego.Point{0, 0}, "Someplace", nil})
 
 If you want to update the location of an object, you must delete it, update it,
-and re-insert.  Just modifying the object so that the `*Rect` returned by
+and re-insert. Just modifying the object so that the `*Rect` returned by
 `Location()` changes, without deleting and re-inserting the object, will
 corrupt the tree.
 
@@ -170,29 +163,26 @@ query point.
 See [GoDoc](http://godoc.org/github.com/dhconnelly/rtreego) for full API
 documentation.
 
-References
-----------
+## References
 
-- A. Guttman.  R-trees: A Dynamic Index Structure for Spatial Searching.
+- A. Guttman. R-trees: A Dynamic Index Structure for Spatial Searching.
   Proceedings of ACM SIGMOD, pages 47-57, 1984.
   http://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Guttman84.pdf
 
-- N. Beckmann, H .P. Kriegel, R. Schneider and B. Seeger.  The R*-tree: An
-  Efficient and Robust Access Method for Points and Rectangles.  Proceedings
+- N. Beckmann, H .P. Kriegel, R. Schneider and B. Seeger. The R\*-tree: An
+  Efficient and Robust Access Method for Points and Rectangles. Proceedings
   of ACM SIGMOD, pages 323-331, May 1990.
   http://infolab.usc.edu/csci587/Fall2011/papers/p322-beckmann.pdf
 
-- N. Roussopoulos, S. Kelley and F. Vincent.  Nearest Neighbor Queries.  ACM
+- N. Roussopoulos, S. Kelley and F. Vincent. Nearest Neighbor Queries. ACM
   SIGMOD, pages 71-79, 1995.
   http://www.postgis.org/support/nearestneighbor.pdf
 
-Author
-------
+## Author
 
 Written by [Daniel Connelly](http://dhconnelly.com) (<dhconnelly@gmail.com>).
 
-License
--------
+## License
 
 rtreego is released under a BSD-style license, described in the `LICENSE`
 file.
